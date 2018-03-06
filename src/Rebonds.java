@@ -3,41 +3,42 @@ import java.util.Scanner;
 public class Rebonds {
 
 	public static void main(String[] args) {
-		
-		Scanner clavier = new Scanner(System.in);
-		
-		double g = 9.81, H0, eps, v, v1, h;
-		int nbr;
-		int reb = 0;
-		
+
+		Scanner scanner = new Scanner(System.in);
+
+		double G = 9.81, H0, eps, v, v1, h, h1;
+		int NBR;
+
 		do {
-			System.out.print("Entrez la heuteur initiale h = ");
-			H0 = clavier.nextDouble();	
-		} while (H0 < 0);
-		
+			System.out.print("Coefficient de rebond (0 <= coeff < 1) : ");
+			eps = scanner.nextDouble();
+		} while ((eps < 0.0) || (eps >= 1.0));
 		do {
-			System.out.print("Entrez le coefficient de rebond (0 <= esp < 1) eps = ");
-			eps = clavier.nextDouble();	
-		} while (eps < 0 && eps >1);
-		
+			System.out.print("Hauteur initiale (0 <= H0) : ");
+			H0 = scanner.nextDouble();
+		} while (H0 < 0.0);
 		do {
-			System.out.print("Entrez le nombre de rebonds (nbr >= 0) nbr = ");
-			nbr = clavier.nextInt();	
-		} while (nbr < 0);
-		
-		v = Math.sqrt(2*H0*g);
-		
-		do {
-			v1 = eps*v;
-			h = v1*v1/(2*g);
-			v = Math.sqrt(2*h*g);
-			reb++;
-		} while (reb != nbr);
-		
-		System.out.print("Après " + nbr + " rebonds, la hauteur de la balle est " + h);
-		
-		clavier.close();
-		
+			System.out.print("Nombre de rebonds (0 <= N ) : ");
+			NBR = scanner.nextInt();
+		} while (NBR < 0);
+		// Boucle de calcul
+		h = H0;
+		// on fait une itération par rebond
+		for (int nombre = 0; nombre < NBR; ++nombre) {
+			v = Math.sqrt(2.0 * G * h);
+			// vitesse après le rebond
+			v1 = eps * v;
+			// la hauteur à laquelle elle remonte...
+			h1 =(v1 * v1) / (2.0 * G);
+			// ...qui devient la nouvelle hauteur initiale
+			h = h1;
+			System.out.println("rebond " + (nombre+1) + " : " + h);
+		}
+
+		System.out.print("Après " + NBR + " rebonds, la hauteur de la balle est " + h);
+
+		scanner.close();
+
 	}
 
 }
