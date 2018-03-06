@@ -6,9 +6,26 @@ public class Rebonds {
 
 		Scanner scanner = new Scanner(System.in);
 
-		double G = 9.81, H0, eps, v, v1, h, h1;
-		int NBR;
-
+		//Constante de gravité
+		final double G = 9.81;
+		// Déclarations
+		// vitesses avant et après le rebond
+		double v = 0.0;
+		double v1 = 0.0;
+		// hauteur avant le rebond, hauteur de remontée
+		double h = 0.0;
+		double h1 = 0.0;
+		// hauteur initiale
+		double H0 = 0.0;
+		// valeur epsilon
+		double eps = 0.0;
+		// nombre de rebonds
+		int NBR = 0;
+		
+		/*
+		* Entrée des valeurs par l'utilisateur,
+		* avec test de validité
+		*/
 		do {
 			System.out.print("Coefficient de rebond (0 <= coeff < 1) : ");
 			eps = scanner.nextDouble();
